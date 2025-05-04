@@ -2,778 +2,105 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TariX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chargement...</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            flex-direction: column;
+            gap: 3vh;
+            transition: all 0.75s ease-in-out;
+            animation: transitionIn 0.75s;
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: rgb(12 8 22);
-      overflow-x: hidden;
-      animation: transitionIn 0.75s;
-    }
+        }
 
 
-    @keyframes transitionIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-    header {
-      font-family: system-ui;
-      text-transform: uppercase;
-      font-size: 1rem;
-      background: radial-gradient(#ffeb3b, #ff9800), url("images/Taxii.png");
-      color: whitesmoke;
-      padding: 20vh 5vw;
-      background-image: url("Taxii.png");
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      height: 37vh;
-    }
+        .loading {
+            display: flex;
+        }
 
-    section {
-      width: 100%;
-      padding: 2rem 1rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+        .dot {
+            width: 15px;
+            height: 15px;
+            margin: 0 5px;
+            background-color: #ffca27;
+            border-radius: 50%;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
 
-    .container {
-      max-width: 600px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
 
-    input.text-input {
-      width: 100%;
-      padding: 1rem 2rem;
-      border: none;
-      outline: none;
-      border-radius: 0.5rem;
-      background: #282732;
-      color: #ffca27;
-      transition: all 0.3s ease-in-out;
-      font-size: 1rem;
-    }
+        .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
 
-    .toggle-switch {
-      display: inline-block;
-      width: 50px;
-      height: 25px;
-      position: relative;
-    }
+        .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
 
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
+        @keyframes bounce {
 
-    .slider {
-      position: absolute;
-      cursor: pointer;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #282732;
-      transition: 0.4s;
-      border-radius: 25px;
-    }
+            0%,
+            100% {
+                transform: translateY(0);
+            }
 
-    .slider:before {
-      position: absolute;
-      content: "";
-      height: 19px;
-      width: 19px;
-      left: 3px;
-      bottom: 3px;
-      background-color: white;
-      transition: 0.4s;
-      border-radius: 50%;
-    }
-
-    input:checked+.slider {
-      background-color: #ffca27;
-    }
-
-    input:checked+.slider:before {
-      transform: translateX(25px);
-    }
-
-    .custom-button {
-      background: linear-gradient(to right, #ffeb3b, #ff9800);
-      color: dimgray;
-      border: none;
-      border-radius: 8px;
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      letter-spacing: 0.2rem;
-      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-      width: 100%;
-      max-width: 300px;
-      transition: transform 0.2s;
-    }
-
-    .custom-button img {
-      width: 24px;
-      height: 24px;
-    }
-
-    .heartbeat-effect {
-      animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-
-      0%,
-      100% {
-        transform: scale(1);
-      }
-
-      50% {
-        transform: scale(1.1);
-      }
-    }
-
-    footer {
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      height: 10vh;
-      font-family: system-ui;
-      text-transform: uppercase;
-      font-size: 0.6rem;
-      background: #000;
-      color: whitesmoke;
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
-      gap: 1vh;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        padding: 15vh 2vw;
-      }
-
-      .custom-button {
-        font-size: 16px;
-        padding: 12px 20px;
-      }
-    }
-
-    #contanaira {
-      position: absolute;
-      margin-top: "60vh";
-      padding: "30vh";
-
-    }
-
-    #redDiv {
-      position: fixed;
-      display: flex;
-      place-content: center;
-      top: 0px;
-      left: 0px;
-      width: 100%;
-      height: fit-content;
-      background: black;
-      z-index: 9999;
-      transition: all transform 1s ease-in-out;
-      transform: translateX(100%);
-      color: white;
-      flex-direction: column;
-      padding: 7vh;
-      font-size: 0.7rem;
-      overflow: auto;
-
-    }
-
-    #signOutButton {
-      position: absolute;
-      display: block !important;
-      width: 4vh;
-      height: auto;
-      z-index: 1;
-      bottom: 0vh;
-      right: 2vh;
-      background: red;
-    }
-
-    .profile-image-container {
-      position: fixed;
-      top: 15px;
-      left: 60px;
-      z-index: 1;
-    }
-
-    .profile-image {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      /* Pour afficher une image de profil circulaire */
-      object-fit: cover;
-      /* Pour que l'image remplisse le conteneur sans distorsion */
-
-    }
-  </style>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-
-  <div class="profile-image-container">
-    <img id="userProfileImage" class="profile-image" src="" alt="Photo de profil">
-  </div>
-
-
-
-
-
-
-
-
-  <header style="clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);">
-    <div
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(#ffeb3b, #ff9800); opacity: 0.8; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold; color: whitesmoke; z-index: 10; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">
+    <img src="loading.svg" alt="Suitcase" style="    width: 7vh; height: auto;">
+    <div class="loading">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
     </div>
-    <div style="position: fixed; top: 10px; left: 10px; padding: 5px; z-index: 100;">
-
-      <img src="dashboard.svg" alt="Icon" style="width: 40px; height: 40px; cursor: pointer; border-radius: 10%;"
-        onclick="toggleMenu()">
-    </div>
-    <div id="menuOverlay"
-      style="z-index: 1000;display: none; position: fixed; top: 0; left: 0; width: 50%; height: 100%; background: rgba(0, 0, 0, 0.8); transition: all 0.3s ease-in-out; transform: translateX(-100%);">
-      <nav style="padding-top: 80px;">
-        <ul
-          style="list-style: none; padding: 10px; margin: 0; display: flex; flex-direction: column; gap: 20px; align-items: flex-start;">
-          <li>
-            <a href="index.html">
-              <img src="home.svg" alt="Home" style="width: 6vh; height: 24px; scale: 1.5; pointer-events: none;">
-            </a>
-          </li>
-          <li>
-            <a href="about.html">
-              <img src="info.svg" alt="Info" style="width: 6vh; height: 24px; scale: 1.5; cursor: pointer;">
-            </a>
-          </li>
-
-        </ul>
-      </nav>
-    </div>
-    <div id="price"
-      style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(#ffeb3b, #ff9800); opacity: 0.8; display: none; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold; color: whitesmoke; z-index: 10; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">
-      <span
-        style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 1.5rem; font-weight: bold; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);"
-        onclick="document.getElementById('price').style.display='none'; this.style.display='none';">×</span>
-    </div>
-
-
 
 
     <script>
-      function toggleMenu() {
-        const menuOverlay = document.getElementById('menuOverlay');
-        if (menuOverlay.style.display === 'none' || menuOverlay.style.transform === 'translateX(-100%)') {
-          menuOverlay.style.display = 'block';
-          setTimeout(() => {
-            menuOverlay.style.transform = 'translateX(0)';
-          }, 10);
-        } else {
-          menuOverlay.style.transform = 'translateX(-100%)';
-          setTimeout(() => {
-            menuOverlay.style.display = 'none';
-          }, 300);
-        }
-      }
 
-      document.addEventListener('click', (event) => {
-        const menuOverlay = document.getElementById('menuOverlay');
-        const menuIcon = document.querySelector('img[onclick="toggleMenu()"]');
-        if (menuOverlay.style.display === 'block' && !menuOverlay.contains(event.target) && event.target !== menuIcon) {
-          menuOverlay.style.transform = 'translateX(-100%)';
-          setTimeout(() => {
-            menuOverlay.style.display = 'none';
-          }, 300);
-        }
-      });
-    </script>
-  </header>
-  <main>
-    <section id="content">
-      <p>Contenu principal ici...</p>
-      <div class="container">
-
-        <input type="text" id="input1" class="text-input" placeholder="Basic rate"
-          oninput="this.value = this.value.replace(/[^0-9.,]/g, '')" style="width: 100%; max-width: 300px;" />
-        <input type="text" id="input2" class="text-input" placeholder="Rate per kilometer"
-          oninput="this.value = this.value.replace(/[^0-9.,]/g, '')" style="width: 100%; max-width: 300px;" />
-        <input type="text" id="input3" class="text-input" placeholder="Distance traveled"
-          oninput="this.value = this.value.replace(/[^0-9.,]/g, '')" style="width: 100%; max-width: 300px;" />
-
-        <!-- Toggle Input -->
-        <label class="toggle-switch" style="margin-top: 20px;margin-bottom: 20px;">
-          <input type="checkbox" id="toggleInput">
-          <span class="slider"></span>
-          <img src="speed.svg" alt="Night Mode" id="toggleIcon"
-            style="width: 20px; height: 20px; margin-left: -50px; display: inline-block; vertical-align: middle;"
-            onerror="this.style.display='none';">
-          <img src="cost.svg" alt="Night Rate"
-            style="width: 20px; height: 20px; margin-left: -50px; display: inline-block; vertical-align: middle;"
-            onerror="this.style.display='none';">
-        </label>
-
-        <button class="custom-button"
-          style="width: 50px; height: 50px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-          <img src="taxi.svg" alt="Suitcase" style="width: 30px; height: 30px;">
-        </button>
-
-
-      </div>
-
-
-
-      </div>
-    </section>
-  </main>
-  <footer>
-
-
-
-    <img src="copyright.svg" alt="Info" style="width: 24px; height: 24px; pointer-events: none;">
-
-    <span>© 2025 TariX - Version 1.0.0</span>
-    <a href="privacy.html">
-      <img src="privacy.svg" alt="Privacy" style="width: 24px; height: 24px;">
-    </a>
-
-    <a href="terms.html">
-      <img src="page_footer.svg" alt="Terms" style="width: 24px; height: 24px;">
-    </a>
-
-    <button id="signOutButton" style="background-color: transparent; border: 0;outline: 0;  cursor: pointer;"><img
-      src="logou.svg" alt="Icon" style="width: 40px; height: 40px; cursor: pointer; border-radius: 10%;">
-  </button>
-  </footer>
-
-  <script>
-    const inputs = document.querySelectorAll('.text-input');
-
-    inputs.forEach(input => {
-      input.addEventListener('focus', () => {
-        input.style.background = '#ffca27';
-        input.style.color = '#282732';
-        input.style.padding = '1.5rem 2.5rem';
-        input.style.borderRadius = '0';
-      });
-
-      input.addEventListener('blur', () => {
-        input.style.background = '#282732';
-        input.style.color = '#ffca27';
-        input.style.padding = '1rem 2rem';
-        input.style.borderRadius = '0.5rem';
-      });
-    });
-
-
-
-    document.querySelector('.custom-button').addEventListener('click', () => {
-      const basicRate = parseFloat(document.getElementById('input1').value) || 0;
-      const ratePerKm = parseFloat(document.getElementById('input2').value) || 0;
-      const distance = parseFloat(document.getElementById('input3').value) || 0;
-      const isNightRate = document.getElementById('toggleInput').checked;
-
-      let finalPrice = basicRate + (ratePerKm * distance);
-
-      if (isNightRate) {
-        finalPrice *= 1.5; // Apply 50% increase for night rate
-        if (finalPrice < 9) {
-          finalPrice = 9; // Ensure minimum price is 9 for night rate
-        }
-      }
-
-
-      const priceDiv = document.getElementById('price');
-      priceDiv.style.display = 'flex';
-      priceDiv.innerHTML = `
-          <span style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 1.5rem; font-weight: bold;" 
-        onclick="document.getElementById('price').style.display='none'; this.style.display='none';">×</span>
-            <svg xmlns="http://www.w3.org/2000/svg" height="44px" viewBox="0 -960 960 960" width="44px" fill="#FFFFFF" style="margin-right: 10px; filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.5));"><path d="M160-640h640v-80H160v80Zm-80-80q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v240H160v240h164v80H160q-33 0-56.5-23.5T80-240v-480ZM598-80 428-250l56-56 114 112 226-226 56 58L598-80ZM160-720v480-180 113-413Z"/></svg> 
-          ${finalPrice.toFixed(2)} €
-        `;
-    });
-
-
-
-
-
-
-
-    // Add tap effect to the button
-    const button = document.querySelector('.custom-button');
-    button.addEventListener('mousedown', () => {
-      button.style.transform = 'scale(0.95)';
-    });
-
-    button.addEventListener('mouseup', () => {
-      button.style.transform = 'scale(1)';
-    });
-
-    button.addEventListener('mouseleave', () => {
-      button.style.transform = 'scale(1)';
-    });
-
-    // Add tap effect to images
-    const images = document.querySelectorAll('img');
-    images.forEach(image => {
-      image.addEventListener('mousedown', () => {
-        image.style.transform = 'scale(0.95)';
-      });
-
-      image.addEventListener('mouseup', () => {
-        image.style.transform = 'scale(1)';
-      });
-
-      image.addEventListener('mouseleave', () => {
-        image.style.transform = 'scale(1)';
-      });
-    });
-
-    // Add tap effect to show the area tapped
-    document.addEventListener('click', (event) => {
-      const tapEffect = document.createElement('div');
-      tapEffect.style.position = 'absolute';
-      tapEffect.style.width = '20px';
-      tapEffect.style.height = '20px';
-      tapEffect.style.borderRadius = '50%';
-      tapEffect.style.background = 'rgba(255, 255, 255, 0.5)';
-      tapEffect.style.pointerEvents = 'none';
-      tapEffect.style.left = `${event.pageX - 10}px`;
-      tapEffect.style.top = `${event.pageY - 10}px`;
-      tapEffect.style.animation = 'tapEffectAnimation 0.5s ease-out';
-      document.body.appendChild(tapEffect);
-
-      tapEffect.addEventListener('animationend', () => {
-        tapEffect.remove();
-      });
-    });
-
-    // Define the animation for the tap effect
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes tapEffectAnimation {
-          0% {
-        transform: scale(1);
-        opacity: 1;
-          }
-          100% {
-        transform: scale(2);
-        opacity: 0;
-          }
-        }
-      `;
-    document.head.appendChild(style);
-
-    document.querySelector('.custom-button').addEventListener('click', () => {
-      const basicRate = parseFloat(document.getElementById('input1').value) || 0;
-      const ratePerKm = parseFloat(document.getElementById('input2').value) || 0;
-      const distance = parseFloat(document.getElementById('input3').value) || 0;
-      const isNightRate = document.getElementById('toggleInput').checked;
-
-      let finalPrice = basicRate + (ratePerKm * distance);
-
-      if (isNightRate) {
-        finalPrice *= 1.5; // Apply 50% increase for night rate
-        if (finalPrice < 9) {
-          finalPrice = 9; // Ensure minimum price is 9 for night rate
-        }
-      }
-
-    });
-
-    inputs.forEach(input => {
-      input.addEventListener('input', () => {
-        const allFilled = Array.from(inputs).every(input => input.value.trim() !== '');
-        const button = document.querySelector('.custom-button');
-        if (allFilled) {
-          button.classList.add('heartbeat-effect');
-        } else {
-          button.classList.remove('heartbeat-effect');
-        }
-      });
-    });
-
-    inputs.forEach((input, index) => {
-      const img = document.createElement('img');
-      const images = ['credit_card.svg', 'credit.svg', 'universal.svg']; // Replace with your image paths
-      img.src = images[index % images.length]; // Assign a different image for each input
-      img.alt = 'Input Icon';
-      img.style.width = '30px';
-      img.style.height = '30px';
-      img.style.cursor = 'pointer';
-      img.style.transition = 'transform 0.3s ease-in-out';
-      img.style.animation = 'pulseEffect 1.5s infinite'; // Add pulse effect
-
-      input.style.display = 'none'; // Hide the input initially
-      input.parentNode.insertBefore(img, input);
-
-      img.addEventListener('click', () => {
-        img.style.transform = 'scale(0.8)';
         setTimeout(() => {
-          img.style.transform = 'scale(1)';
-          img.style.display = 'none';
-          input.style.display = 'block';
-          input.focus();
-        }, 300);
-      });
+            document.body.style.opacity = "0";
+        }, 7000);
 
-      input.addEventListener('blur', () => {
-        // After clicking the button, inputs return to images
-        document.querySelector('.custom-button').addEventListener('click', () => {
-          input.style.display = 'none';
-          img.style.display = 'block';
-          input.value = ''; // Clear the input value
-        });
-      });
-    });
-
-    // Define the pulse effect animation
-    const pulseStyle = document.createElement('style');
-    pulseStyle.textContent = `
-        @keyframes pulseEffect {
-          0% {
-        transform: scale(1);
-        opacity: 1;
-          }
-          50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-          }
-          100% {
-        transform: scale(1);
-        opacity: 1;
-          }
-        }
-      `;
-    document.head.appendChild(pulseStyle);
+        // Rediriger vers l'app principale après 3 secondes
+        setTimeout(() => {
+            document.body.style.opacity = "0";
+            window.location.href = "connexion.html"; principale
+        }, 8000);
 
 
-    // // Add a red div with full-screen size and animation
-    // const redDiv = document.createElement('div');
-    // redDiv.id = 'redDiv';
-    // redDiv.style.position = 'fixed';
-    // redDiv.style.display = 'flex';
-    // redDiv.style.alignItems = 'center';
-    // redDiv.style.justifyContent = 'center';
-    // redDiv.style.top = '0';
-    // redDiv.style.left = '0';
-    // redDiv.style.width = '100%';
-    // redDiv.style.height = '100%';
-    // redDiv.style.background = 'black';
-    // redDiv.style.zIndex = '9999';
-    // redDiv.style.paddingTop = '100vh';
-    // redDiv.style.transition = 'transform 0.3s ease';
-    // redDiv.style.transform = 'translateX(100%)'; // Start off-screen
-    // document.body.appendChild(redDiv);
-
-    // // Add a close button to the red div
-    // const closeButton = document.createElement('span');
-    // closeButton.textContent = '×';
-    // closeButton.style.position = 'absolute';
-    // closeButton.style.top = '10px';
-    // closeButton.style.right = '10px';
-    // closeButton.style.fontSize = '2rem';
-    // closeButton.style.color = 'white';
-    // closeButton.style.cursor = 'pointer';
-    // closeButton.style.zIndex = '10000';
-    // redDiv.appendChild(closeButton);
-
-    // // Function to show the red div with specific text
-    // function showRedDivWithText(text) {
-    //   redDiv.innerHTML = ''; // Clear previous content
-    //   redDiv.appendChild(closeButton); // Re-add the close button
-    //   const textElement = document.createElement('p');
-    //   textElement.textContent = text;
-    //   textElement.style.color = 'white';
-    //   textElement.style.fontSize = '1.2rem';
-    //   textElement.style.textAlign = 'center';
-    //   redDiv.appendChild(textElement);
-    //   redDiv.style.transform = 'translateX(0)'; // Slide into view
-    //   redDiv.style.opacity = '100%'; // Slide into view
-
-    // }
-
-    // // Function to hide the red div
-    // function hideRedDiv() {
-    //   redDiv.style.transform = 'translateX(100%)'; // Slide out of view
-    //   redDiv.style.opacity = '0%'; // Slide out of view
-
-    // }
-
-    // // Add event listeners to footer images, menuOverlay, and menu images
-    // const footerImages = document.querySelectorAll('footer img');
-    // footerImages.forEach((image, index) => {
-    //   image.addEventListener('click', () => {
-    //     const texts = ['Text for Footer Image 1', 'Text for Footer Image 2', 'Text for Footer Image 3'];
-    //     showRedDivWithText(texts[index] || 'Default Text');
-    //   });
-    // });
-
-    // const menuOverlay = document.getElementById('menuOverlay');
-    // const menuImages = menuOverlay.querySelectorAll('img');
-    // menuImages.forEach((image, index) => {
-    //   image.addEventListener('click', (event) => {
-    //     event.stopPropagation(); // Prevent menuOverlay click event
-    //     const texts = [
-    //       'Text for Menu Image 1',
-    //       'Text for Menu Image 2',
-    //       'Support us by donating! Every contribution helps us improve and grow. Thank you!'
-    //     ];
-    //     showRedDivWithText(texts[index] || 'Default Text');
-    //   });
-    // });
-
-    // menuOverlay.addEventListener('click', () => {
-    //   showRedDivWithText('Menu Overlay Clicked');
-    // });
-
-    // // Add a click event to the close button to hide the red div
-    // closeButton.addEventListener('click', hideRedDiv);
-
-    // // Add a click event to the red div to hide it when clicked
-    // redDiv.addEventListener('click', hideRedDiv);
-
-
-
-    // Array of background images for the header slider
-    const headerImages = [
-
-      "taxi in morocco.png",
-      "taxi in france.png",
-      "taxi in spain.png",
-      "taxi in china.png",
-      "taxi in australia.png"
-    ];
-
-    let currentImageIndex = 0;
-    const headerElement = document.querySelector('header');
-
-    // Function to change the background image with a fluent transition
-    function changeHeaderBackground() {
-      currentImageIndex = (currentImageIndex + 1) % headerImages.length;
-      headerElement.style.transition = "background-image 1s ease-in-out, background-size 1s ease-in-out, background-position 1s ease-in-out";
-      headerElement.style.backgroundImage = `url('${headerImages[currentImageIndex]}')`;
-      headerElement.style.backgroundSize = "cover";
-      headerElement.style.backgroundPosition = "center";
-    }
-
-    // Set interval to change the background image every 7 seconds
-    setInterval(changeHeaderBackground, 7000);
-    // Duplicate code removed to avoid conflicts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // Ajouter un écouteur d'événement pour la déconnexion
-    signOutButton.addEventListener('click', () => {
-      auth.signOut().then(() => {
-        // Déconnexion réussie, rediriger l'utilisateur vers la page de connexion (facultatif)
-        console.log('Déconnexion réussie');
-        window.location.href = '/connexion.html'; // Remplacez par l'URL de votre page de connexion
-      }).catch((error) => {
-        // Une erreur s'est produite lors de la déconnexion.
-        console.error('Erreur lors de la déconnexion:', error);
-      });
-    });
-
-
-    // Configuration de Firebase (remplacez par vos propres informations)
-    const firebaseConfig = {
-      apiKey: "AIzaSyBwHS2vbaKiW4rYhk08-CWC6R6J1ForKAA",
-      authDomain: "authentification-65e36.firebaseapp.com",
-      projectId: "authentification-65e36",
-      storageBucket: "authentification-65e36.firebasestorage.app",
-      messagingSenderId: "95764931397",
-      appId: "1:95764931397:web:2d07baa600c901d8a1542c",
-      measurementId: "G-3BG8GTNJ04"
-      
-
-    };
-
-    // Initialiser Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    
-
-    // Récupérer l'élément image
-    const userProfileImage = document.getElementById('userProfileImage');
-
-    // Écouteur pour vérifier l'état de l'authentification de l'utilisateur
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // L'utilisateur est connecté, afficher sa photo de profil
-        const photoURL = user.photoURL;
-        if (photoURL) {
-          userProfileImage.src = photoURL;
-          
-        } else {
-          // Si l'utilisateur n'a pas de photo de profil, afficher une image par défaut
-          userProfileImage.src = 'profil.svg'; // Remplacez par le chemin de votre image par défaut
-        }
-      } else {
-        // L'utilisateur n'est pas connecté, effacer l'image ou afficher un état par défaut
-        userProfileImage.src = 'profil.svg'; // Ou mettez le chemin vers une image de profil par défaut non connecté
-      }
-    });
-
-
-
-  </script>
-
-
-
+    </script>
 </body>
 
 </html>
