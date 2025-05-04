@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Privacy</title>
+    <style>
+        /* Configuration initiale pour la responsivité */
+        body {
+            margin: 0;
+            padding: 4vh;
+            font-family: Arial, sans-serif;
+            /* Choisissez votre police de caractères */
+            background: black;
+            color: whitesmoke;
+            animation: transitionIn 0.75s;
+
+        }
+
+
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            /* Exemple de conteneur principal pour votre contenu */
+            width: 90%;
+            max-width: 1200px;
+            /* Largeur maximale optionnelle */
+            margin: 0 auto;
+            /* Centre le conteneur */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            padding: 10vh 0 0;
+            font-size: 0.8rem;
+
+
+        }
+
+        /* Rendre les images et les vidéos responsives */
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            /* Empêche l'espace supplémentaire sous l'image */
+        }
+
+        /* Utilisation des Flexbox pour la mise en page flexible (un exemple) */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permet aux éléments de passer à la ligne si l'espace est insuffisant */
+            gap: 20px;
+            /* Espacement entre les éléments (ajustez selon vos besoins) */
+        }
+
+        .col-md-6 {
+            /* Exemple de colonne qui prend la moitié de la largeur sur les écrans moyens */
+            flex-basis: calc(50% - 10px);
+            /* Prend 50% moins la moitié de l'espacement */
+        }
+
+        .col-sm-12 {
+            /* Exemple de colonne qui prend toute la largeur sur les petits écrans */
+            flex-basis: 100%;
+        }
+
+        /* Media Queries pour adapter le style aux différentes tailles d'écran */
+        /* Écrans plus petits (mobile) */
+        @media screen and (max-width: 767px) {
+            .container {
+                width: 95%;
+            }
+
+            .col-md-6 {
+                flex-basis: 100%;
+                /* Les colonnes prennent toute la largeur sur mobile */
+            }
+        }
+
+        /* Écrans de taille moyenne (tablettes) */
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .container {
+                width: 90%;
+            }
+
+            /* Vous pouvez ajuster la disposition pour les tablettes ici si nécessaire */
+        }
+
+        /* Écrans plus grands (ordinateurs de bureau) */
+        @media screen and (min-width: 992px) {
+            /* Vos styles par défaut pour les grands écrans peuvent rester ici */
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html">
+        <img src="back.svg" alt="Icon 3" style="width: 4vh; height: auto;" alt="Retour à la page d'accueil">
+      </a>
+    <div class="container"></div>
+
+    <script>
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+        const formattedDate = now.toLocaleDateString('en-US', options);
+        const customName = "TariX";
+
+        document.querySelector('div').innerHTML =
+            `<img src="page_footer.svg" alt="Icon 2" style="width: 10vh; height: auto;"><h1>Terms of Use for ${customName}</h1>
+      <p style="font-size: 0.9em; color: #777;">Current Date & Time in Salé: ${formattedDate}</p>
+      <p>Please read these Terms of Use carefully before using the ${customName} web application. By accessing or using this application, you agree to be bound by these terms.</p>
+      <h2>Acceptance of Terms</h2>
+      <p>By using the ${customName} application, you signify your acceptance of these Terms of Use and our Privacy Policy. If you do not agree to all of these terms, please do not use our application.</p>
+      <h2>User Conduct</h2>
+      <p>You agree to use the ${customName} application only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the application. Prohibited behavior includes harassing or causing distress or inconvenience to any other user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within our application.</p>
+      <h2>Intellectual Property</h2>
+      <p>All content included on the ${customName} application, such as text, graphics, logos, images, and software, is the property of TariX or its licensors and is protected by copyright and other intellectual property laws. You may not reproduce, modify, distribute, or publicly display any content from our application without our prior written consent.</p>
+      <h2>Disclaimer of Warranties</h2>
+      <p>The ${customName} application is provided on an "as is" and "as available" basis without any warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that our application will be uninterrupted or error-free.</p>
+      <h2>Limitation of Liability</h2>
+      <p>To the maximum extent permitted by applicable law, TariX shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or in connection with your use of the ${customName} application.</p>
+      <h2>Indemnification</h2>
+      <p>You agree to indemnify and hold harmless TariX and its affiliates, officers, directors, employees, and agents from and against any and all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys' fees) arising out of or in connection with your use of the ${customName} application or your breach of these Terms of Use.</p>
+      <h2>Governing Law</h2>
+      <p>These Terms of Use shall be governed by and construed in accordance with the laws of Morocco, without regard to its conflict of law provisions.</p>
+      <h2>Changes to These Terms</h2>
+      <p>We reserve the right to modify these Terms of Use at any time. We will notify you of any significant changes by posting the new terms on this page. Your continued use of the ${customName} application after such changes constitutes your acceptance of the new Terms of Use.</p>
+      <h2>Contact Us</h2>
+      <p>If you have any questions about these Terms of Use, please contact us through the ${customName} application or at a provided contact address.</p>
+    </div>`
+
+
+
+
+
+
+        // Exemple: Ajouter/supprimer des classes CSS en fonction de la largeur de l'écran
+        function checkScreenWidth() {
+            const element = document.getElementById('monElement');
+            if (window.innerWidth <= 767) {
+                element.classList.add('mobile-style');
+                element.classList.remove('desktop-style');
+            } else {
+                element.classList.remove('mobile-style');
+                element.classList.add('desktop-style');
+            }
+        }
+
+        // Appeler la fonction au chargement de la page et au redimensionnement
+        window.onload = checkScreenWidth;
+        window.addEventListener('resize', checkScreenWidth);
+
+        // Exemple: Modifier le contenu ou la structure du DOM en fonction de la taille de l'écran
+        function updateContentForMobile() {
+            if (window.innerWidth <= 767) {
+                document.getElementById('titre-principal').textContent = "Titre Mobile";
+            } else {
+                document.getElementById('titre-principal').textContent = "Titre Principal de l'Application Web";
+            }
+        }
+
+        window.addEventListener('load', updateContentForMobile);
+        window.addEventListener('resize', updateContentForMobile);
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.classList.add('loaded');
+        })
+
+        // Add tap effect to images for both mouse and touch
+ const images = document.querySelectorAll('img');
+ images.forEach(image => {
+  const handleStart = () => {
+   image.style.transform = 'scale(0.95)';
+  };
+
+  const handleEnd = () => {
+   image.style.transform = 'scale(1)';
+  };
+
+  // Mouse events
+  image.addEventListener('mousedown', handleStart);
+  image.addEventListener('mouseup', handleEnd);
+  image.addEventListener('mouseleave', handleEnd);
+
+  // Touch events
+  image.addEventListener('touchstart', handleStart);
+  image.addEventListener('touchend', handleEnd);
+  image.addEventListener('touchcancel', handleEnd); // In case the touch is interrupted
+ });
+
+ // Add tap effect to show the area tapped for both mouse and touch
+ document.addEventListener('mousedown', createTapEffect);
+ document.addEventListener('touchstart', createTapEffect);
+
+ function createTapEffect(event) {
+  let touch;
+  let x, y;
+
+  if (event.type === 'touchstart') {
+   touch = event.touches[0];
+   x = touch.pageX;
+   y = touch.pageY;
+  } else {
+   x = event.pageX;
+   y = event.pageY;
+  }
+
+  const tapEffect = document.createElement('div');
+  tapEffect.style.position = 'absolute';
+  tapEffect.style.width = '20px';
+  tapEffect.style.height = '20px';
+  tapEffect.style.borderRadius = '50%';
+  tapEffect.style.background = 'rgba(255, 255, 255, 0.5)';
+  tapEffect.style.pointerEvents = 'none';
+  tapEffect.style.left = `${x - 10}px`;
+  tapEffect.style.top = `${y - 10}px`;
+  tapEffect.style.animation = 'tapEffectAnimation 0.5s ease-out';
+  document.body.appendChild(tapEffect);
+
+  tapEffect.addEventListener('animationend', () => {
+   tapEffect.remove();
+  });
+ }
+
+ // Define the animation for the tap effect
+ const style = document.createElement('style');
+ style.textContent = `
+  @keyframes tapEffectAnimation {
+   0% {
+    transform: scale(1);
+    opacity: 1;
+   }
+   100% {
+    transform: scale(2);
+    opacity: 0;
+   }
+  }
+ `;
+ document.head.appendChild(style);
+    </script>
+</body>
+
+</html>

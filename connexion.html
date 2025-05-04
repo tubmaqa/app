@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000000;
+            animation: transitionIn 0.75s;
+    }
+
+
+    @keyframes transitionIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+        .container {
+            text-align: center;
+            background: rgb(0, 0, 0);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 350px;
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #ffca27;
+        }
+
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffca27;
+            color: black;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .google-btn:hover {
+            background: #ffca27;
+        }
+
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+    </style>
+
+    
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="container">
+        <img src="loading.svg" 
+             alt="Google Logo" class="logo">
+        <h2>TariX</h2>
+        <a id="google-signin-btn" class="google-btn" class="google-btn">
+            <img src="login.svg" 
+                 alt="loginIcon">
+            Se connecter avec Google
+        </a>
+
+        <div id="user-profile" style="display: none;">
+            <img id="user-photo" src="" alt="Photo de profil">
+            <span id="user-display-name"></span>
+            <button id="signout-btn">Se déconnecter</button>
+        </div>
+    </div>
+
+    <div id="error-container" class="error-message">
+    </div>
+</div>
+
+
+    <script>
+        // Configuration de Firebase (remplacez par vos propres informations)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwHS2vbaKiW4rYhk08-CWC6R6J1ForKAA",
+            authDomain: "authentification-65e36.firebaseapp.com",
+            projectId: "authentification-65e36",
+            storageBucket: "authentification-65e36.firebasestorage.app",
+            messagingSenderId: "95764931397",
+            appId: "1:95764931397:web:2d07baa600c901d8a1542c",
+            measurementId: "G-3BG8GTNJ04"
+        };
+
+        // Initialiser Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore(); // Initialiser Firestore
+        const errorContainer = document.getElementById('error-container');
+        const userProfileDiv = document.getElementById('user-profile');
+        const userDisplayNameSpan = document.getElementById('user-display-name');
+        const userPhotoImg = document.getElementById('user-photo');
+        const signOutButton = document.getElementById('signout-btn');
+        const googleSignInButton = document.getElementById('google-signin-btn');
+        const containerDiv = document.querySelector('.container');
+
+        // URL de la page de redirection après la connexion
+        const redirectURL = '/index.html'; // Remplacez par l'URL de votre application
+
+        // Fonction pour la connexion avec Google
+        googleSignInButton.addEventListener('click', () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    const credential = firebase.auth.GoogleAuthProvider.credentialFromResult(result);
+                    const token = credential?.accessToken;
+                    console.log('Connexion Google réussie :', user, token);
+                    errorContainer.textContent = '';
+
+                    // Mettre à jour l'interface utilisateur
+                    userProfileDiv.style.display = 'flex';
+                    userDisplayNameSpan.textContent = user.displayName || 'Utilisateur';
+                    userPhotoImg.src = user.photoURL || '';
+                    containerDiv.style.display = 'none';  // Changer la couleur de fond
+
+                    // Ajouter l'utilisateur à la base de données (si ce n'est pas déjà fait)
+                    return db.collection("users").doc(user.uid).set({
+                        uid: user.uid,
+                        email: user.email || '',
+                        displayName: user.displayName || 'Utilisateur',
+                        photoURL: user.photoURL || '',
+                        lastSignInTime: new Date()
+                    }, { merge: true });
+                })
+                .then(() => {
+                    console.log("Informations de l'utilisateur Google ajoutées/mises à jour dans Firestore.");
+                    // Rediriger l'utilisateur ici, après que la connexion et l'enregistrement (ou la mise à jour) sont réussis
+                    window.location.href = redirectURL;
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    const email = error.customData?.email;
+                    const credential = firebase.auth.GoogleAuthProvider.credentialFromError(error);
+                    console.error('Erreur de connexion Google :', errorCode, errorMessage, email, credential);
+                    errorContainer.textContent = `Erreur de connexion Google : ${errorMessage}`;
+                    // En cas d'erreur, on ne redirige pas. L'utilisateur reste sur la page de connexion.
+                });
+        });
+
+        </script>
+</body>
+</html>

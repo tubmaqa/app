@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Privacy</title>
+    <style>
+        /* Configuration initiale pour la responsivité */
+        body {
+            margin: 0;
+            padding: 4vh;
+            font-family: Arial, sans-serif;
+            /* Choisissez votre police de caractères */
+            background: black;
+            color: whitesmoke;
+            animation: transitionIn 0.75s;
+
+        }
+
+
+        @keyframes transitionIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            /* Exemple de conteneur principal pour votre contenu */
+            width: 90%;
+            max-width: 1200px;
+            /* Largeur maximale optionnelle */
+            margin: 0 auto;
+            /* Centre le conteneur */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            align-content: center;
+            padding: 10vh 0 0;
+            font-size: 0.8rem;
+
+
+        }
+
+        /* Rendre les images et les vidéos responsives */
+        img,
+        video {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            /* Empêche l'espace supplémentaire sous l'image */
+        }
+
+        /* Utilisation des Flexbox pour la mise en page flexible (un exemple) */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            /* Permet aux éléments de passer à la ligne si l'espace est insuffisant */
+            gap: 20px;
+            /* Espacement entre les éléments (ajustez selon vos besoins) */
+        }
+
+        .col-md-6 {
+            /* Exemple de colonne qui prend la moitié de la largeur sur les écrans moyens */
+            flex-basis: calc(50% - 10px);
+            /* Prend 50% moins la moitié de l'espacement */
+        }
+
+        .col-sm-12 {
+            /* Exemple de colonne qui prend toute la largeur sur les petits écrans */
+            flex-basis: 100%;
+        }
+
+        /* Media Queries pour adapter le style aux différentes tailles d'écran */
+        /* Écrans plus petits (mobile) */
+        @media screen and (max-width: 767px) {
+            .container {
+                width: 95%;
+            }
+
+            .col-md-6 {
+                flex-basis: 100%;
+                /* Les colonnes prennent toute la largeur sur mobile */
+            }
+        }
+
+        /* Écrans de taille moyenne (tablettes) */
+        @media screen and (min-width: 768px) and (max-width: 991px) {
+            .container {
+                width: 90%;
+            }
+
+            /* Vous pouvez ajuster la disposition pour les tablettes ici si nécessaire */
+        }
+
+        /* Écrans plus grands (ordinateurs de bureau) */
+        @media screen and (min-width: 992px) {
+            /* Vos styles par défaut pour les grands écrans peuvent rester ici */
+        }
+    </style>
+</head>
+
+<body>
+    <a href="index.html">
+        <img src="back.svg" alt="Icon 3" style="width: 4vh; height: auto;" alt="Retour à la page d'accueil">
+      </a>
+    <div class="container"></div>
+
+    <script>
+        const now = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+        const formattedDate = now.toLocaleDateString('en-US', options);
+
+        document.querySelector('div').innerHTML =
+            `<img src="privacy.svg" alt="Icon 2" style="width: 10vh; height: auto;"><h1>Privacy Policy</h1> <p style="font-size: 0.9em; color: #777;">${formattedDate}</p> <p>Your privacy is important to us. This privacy policy explains how we collect, use, and protect your personal information when you use our Android web application.</p> <h2>Information We Collect</h2> <p>We may collect the following types of information:</p> <ul> <li>Personally Identifiable Information (e.g., name, email address) - only if you voluntarily provide it to us.</li> <li>Usage Data (e.g., access logs, pages visited, session duration).</li> <li>Device Information (e.g., device model, operating system).</li> </ul> <h2>How We Use Your Information</h2> <p>We may use your information to:</p> <ul> <li>Provide and improve our application.</li> <li>Personalize your user experience.</li> <li>Communicate with you (e.g., respond to your inquiries).</li> <li>Analyze application usage to improve our services.</li> </ul> <h2>Sharing Your Information</h2> <p>We only share your personal information with third parties in the following limited circumstances:</p> <ul> <li>With your explicit consent.</li> <li>With service providers who help us operate our application (e.g., hosting, analytics). These providers are obligated to protect your information.</li> <li>If required by law (e.g., in response to a court order).</li> </ul> <h2>Security of Your Information</h2> <p>We take reasonable security measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the Internet or electronic storage is completely secure, and we cannot guarantee absolute security.</p> <h2>Your Rights</h2> <p>You may have certain rights regarding your personal information, including the right to access, rectify, or delete your information. Please contact us if you wish to exercise these rights.</p> <h2>Changes to This Privacy Policy</h2> <p>We may update this privacy policy from time to time. We will notify you of any significant changes by posting the new policy on this page.</p> <h2>Contact Us</h2> <p>If you have any questions or concerns about this privacy policy, please contact us at a.malek.idrissi@gmail.com.</p> </div>`
+
+
+
+
+
+
+        // Exemple: Ajouter/supprimer des classes CSS en fonction de la largeur de l'écran
+        function checkScreenWidth() {
+            const element = document.getElementById('monElement');
+            if (window.innerWidth <= 767) {
+                element.classList.add('mobile-style');
+                element.classList.remove('desktop-style');
+            } else {
+                element.classList.remove('mobile-style');
+                element.classList.add('desktop-style');
+            }
+        }
+
+        // Appeler la fonction au chargement de la page et au redimensionnement
+        window.onload = checkScreenWidth;
+        window.addEventListener('resize', checkScreenWidth);
+
+        // Exemple: Modifier le contenu ou la structure du DOM en fonction de la taille de l'écran
+        function updateContentForMobile() {
+            if (window.innerWidth <= 767) {
+                document.getElementById('titre-principal').textContent = "Titre Mobile";
+            } else {
+                document.getElementById('titre-principal').textContent = "Titre Principal de l'Application Web";
+            }
+        }
+
+        window.addEventListener('load', updateContentForMobile);
+        window.addEventListener('resize', updateContentForMobile);
+
+
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.classList.add('loaded');
+        })
+
+        // Add tap effect to images for both mouse and touch
+ const images = document.querySelectorAll('img');
+ images.forEach(image => {
+  const handleStart = () => {
+   image.style.transform = 'scale(0.95)';
+  };
+
+  const handleEnd = () => {
+   image.style.transform = 'scale(1)';
+  };
+
+  // Mouse events
+  image.addEventListener('mousedown', handleStart);
+  image.addEventListener('mouseup', handleEnd);
+  image.addEventListener('mouseleave', handleEnd);
+
+  // Touch events
+  image.addEventListener('touchstart', handleStart);
+  image.addEventListener('touchend', handleEnd);
+  image.addEventListener('touchcancel', handleEnd); // In case the touch is interrupted
+ });
+
+ // Add tap effect to show the area tapped for both mouse and touch
+ document.addEventListener('mousedown', createTapEffect);
+ document.addEventListener('touchstart', createTapEffect);
+
+ function createTapEffect(event) {
+  let touch;
+  let x, y;
+
+  if (event.type === 'touchstart') {
+   touch = event.touches[0];
+   x = touch.pageX;
+   y = touch.pageY;
+  } else {
+   x = event.pageX;
+   y = event.pageY;
+  }
+
+  const tapEffect = document.createElement('div');
+  tapEffect.style.position = 'absolute';
+  tapEffect.style.width = '20px';
+  tapEffect.style.height = '20px';
+  tapEffect.style.borderRadius = '50%';
+  tapEffect.style.background = 'rgba(255, 255, 255, 0.5)';
+  tapEffect.style.pointerEvents = 'none';
+  tapEffect.style.left = `${x - 10}px`;
+  tapEffect.style.top = `${y - 10}px`;
+  tapEffect.style.animation = 'tapEffectAnimation 0.5s ease-out';
+  document.body.appendChild(tapEffect);
+
+  tapEffect.addEventListener('animationend', () => {
+   tapEffect.remove();
+  });
+ }
+
+ // Define the animation for the tap effect
+ const style = document.createElement('style');
+ style.textContent = `
+  @keyframes tapEffectAnimation {
+   0% {
+    transform: scale(1);
+    opacity: 1;
+   }
+   100% {
+    transform: scale(2);
+    opacity: 0;
+   }
+  }
+ `;
+ document.head.appendChild(style);
+    </script>
+</body>
+
+</html>
